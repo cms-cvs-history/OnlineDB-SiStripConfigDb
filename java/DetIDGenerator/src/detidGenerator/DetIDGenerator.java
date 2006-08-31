@@ -11,12 +11,9 @@ import java.util.Vector;
 **/
 
 /*
-  $Date: 2006/08/30 15:21:12 $
+  $Date: 2006/06/29 09:19:22 $
   
   $Log: DetIDGenerator.java,v $
-  Revision 1.3  2006/08/30 15:21:12  gbaulieu
-  Add the TOB analyzer
-
   Revision 1.2  2006/06/29 09:19:22  gbaulieu
   The database to which we export the data is no more hard coded. The informations are taken from the $CONFDB variable.
 
@@ -232,16 +229,9 @@ public class DetIDGenerator
     }
 
     private void getFiberLength(Vector<Vector<String>> list) throws java.sql.SQLException{
-/*
-	for(int i=0;i<list.size();i++){
-	    Vector<String> v = list.get(i);
-	    v.add("1");
-	}
-*/
 	for(int i=0;i<list.size();i++){
 	    try{
 		Vector<String> v = list.get(i);
-
 		String cDetID = new String(v.get(1));
 
 		String[] det_id = cDetID.split("\\.");
@@ -284,8 +274,7 @@ public class DetIDGenerator
 		    throw new Exception("Can not find the AOH corresponding to module "+v.get(0));
 		}
 		if(DetIDGenerator.verbose)
-		System.out.print(((i*100)/list.size())+" %\r");
-
+		    System.out.print(((i*100)/list.size())+" %\r");
 	    }
 	    catch(java.sql.SQLException e){
 		throw e;
@@ -319,7 +308,6 @@ public class DetIDGenerator
     private void getDCU(Vector<Vector<String>> list) throws java.sql.SQLException{
 	for(int i=0;i<list.size();i++){
 	    Vector<String> v = list.get(i);
-
 	    query = "select MB.dcuid from cmstrkdb.modvalidation_2_mod_ MV, cmstrkdb.modulbasic_2_mod_ MB "+
 		"where MB.test_id=MV.modulbasic_2_mod_ AND MV.status='reference' AND MV.object_id="+v.get(0);
 
