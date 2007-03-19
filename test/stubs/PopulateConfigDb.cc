@@ -1,6 +1,6 @@
-// Last commit: $Id: $
+// Last commit: $Id: PopulateConfigDb.cc,v 1.1 2006/12/22 12:18:38 bainbrid Exp $
 // Latest tag:  $Name:  $
-// Location:    $Source: $
+// Location:    $Source: /cvs_server/repositories/CMSSW/CMSSW/OnlineDB/SiStripConfigDb/test/stubs/PopulateConfigDb.cc,v $
 
 #include "OnlineDB/SiStripConfigDb/test/stubs/PopulateConfigDb.h"
 #include "FWCore/Framework/interface/ESHandle.h"
@@ -112,14 +112,14 @@ void PopulateConfigDb::retrieveDetIds( const edm::EventSetup& iSetup,
   partitions[2].first = "TEC+";
   partitions[3].first = "TEC-";
 
-  // Retrieve geometry
-  edm::ESHandle<TrackerGeometry> pDD;
-  //iSetup.get<TrackerDigiGeometryRecord>().get( pDD );
-  edm::LogInfo(mlConfigDb_) 
-    << "[PopulateConfigDb::retrieveDetIds]"
-    << " Iterating through "<< number_of_dets 
-    //<< " of " << pDD->detIds().size()
-    << " detectors found in geometry";
+//   // Retrieve geometry
+//   edm::ESHandle<TrackerGeometry> pDD;
+//   //iSetup.get<TrackerDigiGeometryRecord>().get( pDD );
+//   edm::LogInfo(mlConfigDb_) 
+//     << "[PopulateConfigDb::retrieveDetIds]"
+//     << " Iterating through "<< number_of_dets 
+//     //<< " of " << pDD->detIds().size()
+//     << " detectors found in geometry";
 
 //   // Iterate through strip dets
 //   uint32_t ndets = 0;
@@ -231,11 +231,11 @@ void PopulateConfigDb::createFecCabling( const uint16_t& partition_number,
       uint16_t fec_ring  = (imod/(modules_per_ccu*ccus_per_ring)) % rings_per_fec + 1;
       uint16_t ccu_addr  = (imod/(modules_per_ccu)) % ccus_per_ring + 1;
       uint16_t ccu_chan  = (imod) % modules_per_ccu + 26;
-      uint32_t dcu_id = SiStripFecKey::key( fec_crate,
-					    fec_slot,
-					    fec_ring,
-					    ccu_addr,
-					    ccu_chan );
+      uint32_t dcu_id = SiStripFecKey( fec_crate,
+				       fec_slot,
+				       fec_ring,
+				       ccu_addr,
+				       ccu_chan ).key();
       
       FedChannelConnection conn( fec_crate, fec_slot, fec_ring, ccu_addr, ccu_chan,
 				 apv_addr, apv_addr+1,
