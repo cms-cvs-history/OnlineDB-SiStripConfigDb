@@ -1,8 +1,6 @@
-// Last commit: $Id: PopulateConfigDb.cc,v 1.1 2006/12/22 12:18:38 bainbrid Exp $
-// Latest tag:  $Name:  $
-// Location:    $Source: /cvs_server/repositories/CMSSW/CMSSW/OnlineDB/SiStripConfigDb/test/stubs/PopulateConfigDb.cc,v $
+// Last commit: $Id: $
 
-#include "OnlineDB/SiStripConfigDb/test/stubs/PopulateConfigDb.h"
+#include "OnlineDB/SiStripConfigDb/test/plugins/PopulateConfigDb.h"
 #include "FWCore/Framework/interface/ESHandle.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "FWCore/ServiceRegistry/interface/Service.h"

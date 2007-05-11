@@ -1,6 +1,6 @@
-// Last commit: $Id: $
-// Latest tag:  $Name:  $
-// Location:    $Source: $
+// Last commit: $Id: PopulateConfigDb.h,v 1.1 2006/12/22 12:18:38 bainbrid Exp $
+// Latest tag:  $Name: HEAD $
+// Location:    $Source: /cvs_server/repositories/CMSSW/CMSSW/OnlineDB/SiStripConfigDb/test/stubs/PopulateConfigDb.h,v $
 
 #ifndef OnlineDB_SiStripESSources_test_PopulateConfigDb_H
 #define OnlineDB_SiStripESSources_test_PopulateConfigDb_H

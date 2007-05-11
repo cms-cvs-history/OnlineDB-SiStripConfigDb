@@ -1,8 +1,6 @@
 // Last commit: $Id: $
-// Latest tag:  $Name:  $
-// Location:    $Source: $
 
-#include "OnlineDB/SiStripConfigDb/test/stubs/test_DatabaseService.h"
+#include "OnlineDB/SiStripConfigDb/test/plugins/test_DatabaseService.h"
 #include "FWCore/ServiceRegistry/interface/Service.h"
 #include "FWCore/MessageLogger/interface/MessageLogger.h"
 #include "DataFormats/SiStripCommon/interface/SiStripConstants.h"

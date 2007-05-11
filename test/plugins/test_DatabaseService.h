@@ -1,6 +1,6 @@
-// Last commit: $Id: $
-// Latest tag:  $Name:  $
-// Location:    $Source: $
+// Last commit: $Id: test_DatabaseService.h,v 1.1 2006/12/22 12:18:38 bainbrid Exp $
+// Latest tag:  $Name: HEAD $
+// Location:    $Source: /cvs_server/repositories/CMSSW/CMSSW/OnlineDB/SiStripConfigDb/test/stubs/test_DatabaseService.h,v $
 
 #ifndef OnlineDB_SiStripConfigDb_test_DatabaseService_H
 #define OnlineDB_SiStripConfigDb_test_DatabaseService_H
