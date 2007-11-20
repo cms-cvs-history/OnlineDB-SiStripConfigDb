@@ -1,4 +1,4 @@
-// Last commit: $Id: $
+// Last commit: $Id: PopulateConfigDb.cc,v 1.1 2007/05/11 12:05:08 bainbrid Exp $
 
 #include "OnlineDB/SiStripConfigDb/test/plugins/PopulateConfigDb.h"
 #include "FWCore/Framework/interface/ESHandle.h"
@@ -70,24 +70,14 @@ void PopulateConfigDb::beginJob( const edm::EventSetup& iSetup ) {
       << " Creating partition '" << partitions[ip].first 
       << "' with " << partitions[ip].second.size() << " dets";
     SiStripFecCabling fec_cabling;
-    createFecCabling( ip, partitions, fec_cabling, dcu_detid_map );
-    if ( upload_ ) { db_->createPartition( partitions[ip].first, fec_cabling ); }
+    createFecCabling( ip, 
+		      partitions, 
+		      fec_cabling, 
+		      dcu_detid_map );
+    if ( upload_ ) { db_->createPartition( partitions[ip].first, 
+					   fec_cabling, 
+					   dcu_detid_map ); }
   }
-
-  // Upload DCU-DetId map to database
-  if ( dcu_detid_map.empty() ) {
-    stringstream ss;
-    ss << "["<<method<<"] Empty DCU-DetId map!";
-    edm::LogError(mlConfigDb_) << ss.str() << "\n";
-    //throw cms::Exception(errorCategory_) << ss.str() << "\n";
-  } else {
-    db_->resetDcuDetIdMap();
-    db_->setDcuDetIdMap( dcu_detid_map );
-    if ( upload_ ) { db_->uploadDcuDetIdMap(); }
-  }
-  
-  // Refresh local caches with newly created descriptions
-  //refreshLocalCaches();
   
   edm::LogInfo(mlConfigDb_) 
     << "[PopulateConfigDb::beginJob] Finished!";
