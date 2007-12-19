@@ -1,3 +1,9 @@
+//@@ A non-zero run number will override any versions specified
+//@@ A null run number means use the versions specified
+//@@ For all versions, "0" means "current state"  
+//@@ If "ForceDcuDetIdVersions" is true, versions not overriden by run number (useful for O2O)
+//@@ If TNS_ADMIN is set, it will override the environmental variable!
+
 service = SiStripConfigDb { 
 
     untracked bool UsingDb     = false
@@ -28,9 +34,7 @@ service = SiStripConfigDb {
     untracked string  OutputFecXml     = "/tmp/fec.xml"
     untracked string  OutputFedXml     = "/tmp/fed.xml"
 
-}
+    untracked string  TNS_ADMIN = "/afs/cern.ch/project/oracle/admin" 
 
-//@@ A non-zero run number will override any versions specified
-//@@ A null run number means use the versions specified
-//@@ For versions, "0" means "current state"  
+}
 

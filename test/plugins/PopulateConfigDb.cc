@@ -1,4 +1,4 @@
-// Last commit: $Id: PopulateConfigDb.cc,v 1.1 2007/05/11 12:05:08 bainbrid Exp $
+// Last commit: $Id: PopulateConfigDb.cc,v 1.2 2007/11/20 22:39:28 bainbrid Exp $
 
 #include "OnlineDB/SiStripConfigDb/test/plugins/PopulateConfigDb.h"
 #include "FWCore/Framework/interface/ESHandle.h"
@@ -260,7 +260,10 @@ void PopulateConfigDb::createFecCabling( const uint16_t& partition_number,
 	    if ( chansPerFed_-fed_ch < imod->nApvPairs() ) { fed_id++; fed_ch = 0; } // move to next FED
 	    for ( uint16_t ipair = 0; ipair < imod->nApvPairs(); ipair++ ) {
 	      pair<uint16_t,uint16_t> addr = imod->activeApvPair( (*imod).lldChannel(ipair) );
-	      pair<uint16_t,uint16_t> fed_channel = pair<uint16_t,uint16_t>( fed_id, fed_ch );
+	      SiStripModule::FedChannel fed_channel( fed_id/16+1, // 16 FEDs per crate, numbering starts from 1
+						     fed_id%16+2, // FED slot starts from 2
+						     fed_id, 
+						     fed_ch );
 	      const_cast<SiStripModule&>(*imod).fedCh( addr.first, fed_channel );
 	      LogDebug(mlConfigDb_)
 		<< "[PopulateConfigDb::createFecCabling]"
