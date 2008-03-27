@@ -6,10 +6,10 @@
 
 service = SiStripConfigDb { 
 
-    untracked bool   UsingDb   = false
-    untracked string ConfDb    = ""
-    untracked string Partition = ""
-    untracked uint32 RunNumber = 0 
+    untracked bool    UsingDb    = false
+    untracked string  ConfDb     = ""
+    untracked vstring Partitions = { "" }
+    untracked uint32  RunNumber  = 0 
 
     untracked bool   UsingDbCache = false
     untracked string SharedMemory = ""
