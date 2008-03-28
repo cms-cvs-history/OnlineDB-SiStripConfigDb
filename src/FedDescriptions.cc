@@ -1,5 +1,5 @@
-// Last commit: $Id: FedDescriptions.cc,v 1.16 2008/02/06 17:13:12 bainbrid Exp $
-// Latest tag:  $Name:  $
+// Last commit: $Id: FedDescriptions.cc,v 1.17 2008/03/26 09:10:05 bainbrid Exp $
+// Latest tag:  $Name: V03-00-01 $
 // Location:    $Source: /cvs_server/repositories/CMSSW/CMSSW/OnlineDB/SiStripConfigDb/src/FedDescriptions.cc,v $
 
 #include "OnlineDB/SiStripConfigDb/interface/SiStripConfigDb.h"
@@ -38,10 +38,8 @@ const SiStripConfigDb::FedDescriptions& SiStripConfigDb::getFedDescriptions() {
 
 #ifdef USING_DATABASE_CACHE
       FedDescriptions* tmp = databaseCache(__func__)->getFed9UDescriptions();
-      if ( tmp ) { 
- 	feds_.resize( tmp->size() );
- 	std::copy( feds_.begin(), feds_.end(), tmp->begin() ); 
-      } else {
+      if ( tmp ) { feds_ = *tmp; }
+      else {
 	edm::LogWarning(mlConfigDb_)
 	  << "[SiStripConfigDb::" << __func__ << "]"
 	  << " NULL pointer to FedDescriptions vector!";
@@ -160,13 +158,19 @@ const vector<uint16_t>& SiStripConfigDb::getFedIds() {
 
   if ( feds_.empty() ) {
     bool using_strips = usingStrips_;
-    deviceFactory(__func__)->setUsingStrips( false );
+    if ( factory_ ) { factory_->setUsingStrips( false ); }
     getFedDescriptions();
-    deviceFactory(__func__)->setUsingStrips( using_strips );
+    if ( factory_ ) { factory_->setUsingStrips( using_strips ); }
   }
   
   FedDescriptions::iterator ifed = feds_.begin();
   for ( ; ifed != feds_.end(); ifed++ ) { 
+    if ( !(*ifed) ) {
+      edm::LogError(mlCabling_)
+	<< "[SiStripConfigDb::" << __func__ << "]"
+	<< " NULL pointer to FedConnection!";
+      continue;
+    }
     fedIds_.push_back( (*ifed)->getFedId() );
   }
   
