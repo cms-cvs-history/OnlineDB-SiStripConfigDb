@@ -1,0 +1,36 @@
+block SiStripPartitions = { 
+    
+    untracked PSet PrimaryPartition = {
+	
+	untracked string PartitionName = ""
+		
+	// Null value means use "latest run"
+	untracked uint32 RunNumber = 0
+
+	// Set to "true" to override run number and use versions
+	untracked bool ForceVersions = false
+	
+	// Null value means "current state"
+	untracked uint32 CablingMajorVersion  = 0
+	untracked uint32 CablingMinorVersion  = 0
+	untracked uint32 FedMajorVersion      = 0 
+	untracked uint32 FedMinorVersion      = 0
+	untracked uint32 FecMajorVersion      = 0
+	untracked uint32 FecMinorVersion      = 0
+	untracked uint32 CalibMajorVersion    = 0
+	untracked uint32 CalibMinorVersion    = 0
+	untracked uint32 DcuDetIdMajorVersion = 0
+	untracked uint32 DcuDetIdMinorVersion = 0
+	
+	// XML input files
+	untracked string  InputModuleXml  = "/afs/cern.ch/cms/cmt/onlinedev/data/examples/module.xml"
+	untracked string  InputDcuInfoXml = "/afs/cern.ch/cms/cmt/onlinedev/data/examples/dcuinfo.xml"
+	untracked vstring InputFecXml     = { "" }
+	untracked vstring InputFedXml     = { "" }
+	
+    } 
+
+    // Additional partitions here...
+
+}
+
