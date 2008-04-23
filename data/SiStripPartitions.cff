@@ -6,16 +6,16 @@ block SiStripPartitions = {
 		
 	// Null value means use "latest run"
 	untracked uint32 RunNumber = 0
-
+	
 	// Set to "true" to override run number and use versions below
-	untracked bool ForceVersions = false
+	untracked bool ForceVersions = true
 	
 	// Syntax is {major,minor}. {0,0} means "current state". 
 	untracked vuint32 CablingVersion  = {0,0}
 	untracked vuint32 FedVersion      = {0,0} 
 	untracked vuint32 FecVersion      = {0,0}
-	untracked vuint32 CalibVersion    = {0,0}
 	untracked vuint32 DcuDetIdVersion = {0,0}
+	untracked vuint32 CalibVersion    = {0,0}
 	
 	// XML input files
 	untracked string  InputModuleXml  = "/afs/cern.ch/cms/cmt/onlinedev/data/examples/module.xml"
