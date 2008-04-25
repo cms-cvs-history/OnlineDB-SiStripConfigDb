@@ -4,11 +4,14 @@ block SiStripPartitions = {
 	
 	untracked string PartitionName = ""
 		
+	// Overrides run number AND versions 
+	untracked bool ForceCurrentState = true
+	
 	// Null value means use "latest run"
 	untracked uint32 RunNumber = 0
 	
-	// Set to "true" to override run number and use versions below
-	untracked bool ForceVersions = true
+	// Overrides run number to use versions below
+	untracked bool ForceVersions = false
 	
 	// Syntax is {major,minor}. {0,0} means "current state". 
 	untracked vuint32 CablingVersion  = {0,0}
@@ -16,7 +19,7 @@ block SiStripPartitions = {
 	untracked vuint32 FecVersion      = {0,0}
 	untracked vuint32 DcuDetIdVersion = {0,0}
 	untracked vuint32 CalibVersion    = {0,0}
-	
+
 	// XML input files
 	untracked string  InputModuleXml  = "/afs/cern.ch/cms/cmt/onlinedev/data/examples/module.xml"
 	untracked string  InputDcuInfoXml = "/afs/cern.ch/cms/cmt/onlinedev/data/examples/dcuinfo.xml"
