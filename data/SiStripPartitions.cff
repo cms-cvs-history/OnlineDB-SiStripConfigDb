@@ -3,23 +3,36 @@ block SiStripPartitions = {
     untracked PSet PrimaryPartition = {
 	
 	untracked string PartitionName = ""
-		
+	
 	// Overrides run number AND versions 
-	untracked bool ForceCurrentState = true
+	untracked bool ForceCurrentState = false
 	
 	// Null value means use "latest run"
 	untracked uint32 RunNumber = 0
 	
-	// Overrides run number to use versions below
+	// Overrides run number and uses versions below
 	untracked bool ForceVersions = false
 	
 	// Syntax is {major,minor}. {0,0} means "current state". 
-	untracked vuint32 CablingVersion  = {0,0}
-	untracked vuint32 FedVersion      = {0,0} 
-	untracked vuint32 FecVersion      = {0,0}
-	untracked vuint32 DcuDetIdVersion = {0,0}
-	untracked vuint32 CalibVersion    = {0,0}
-
+	untracked vuint32 CablingVersion     = {0,0}
+	untracked vuint32 FedVersion         = {0,0} 
+	untracked vuint32 FecVersion         = {0,0}
+	untracked vuint32 DcuDetIdMapVersion = {0,0}
+	untracked vuint32 DcuPsuMapVersion   = {0,0}
+	
+	// Null value means use (analysis) versions below ("calibration")
+	untracked uint32  GlobalAnalysisVersion = 0
+	
+	// Syntax is {major,minor}. {0,0} means "current state". ("history")
+	untracked vuint32 FastCablingVersion    = {0,0}
+	untracked vuint32 ApvTimingVersion      = {0,0}
+	untracked vuint32 OptoScanVersion       = {0,0}
+	untracked vuint32 VpspScanVersion       = {0,0}
+	untracked vuint32 ApvCalibVersion       = {0,0}
+	untracked vuint32 PedestalsVersion      = {0,0}
+	untracked vuint32 ApvLatencyVersion     = {0,0}
+	untracked vuint32 FineDelayVersion      = {0,0}
+	
 	// XML input files
 	untracked string  InputModuleXml  = "/afs/cern.ch/cms/cmt/onlinedev/data/examples/module.xml"
 	untracked string  InputDcuInfoXml = "/afs/cern.ch/cms/cmt/onlinedev/data/examples/dcuinfo.xml"
