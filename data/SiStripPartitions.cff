@@ -4,34 +4,38 @@ block SiStripPartitions = {
 	
 	untracked string PartitionName = ""
 	
-	// Overrides run number AND versions 
+	// Forces versions to be taken from "current state". Overrides ALL settings below.
 	untracked bool ForceCurrentState = false
 	
-	// Null value means use "latest run"
+	// 1) A non-zero value means "retrieve versions from run table".
+	// 2) A null value means "use versions listed below". {0,0} means "current state".
 	untracked uint32 RunNumber = 0
 	
-	// Overrides run number and uses versions below
+	// Only "active" with a non-zero run number.
+	// 1) A non-zero version means "override version retrieved from run table".
+	// 2) A null value {0,0} means "do not override versions retrieved from run table".
 	untracked bool ForceVersions = false
 	
-	// Syntax is {major,minor}. {0,0} means "current state". 
+	// Syntax is {major,minor}. 
 	untracked vuint32 CablingVersion   = {0,0}
 	untracked vuint32 FecVersion       = {0,0}
 	untracked vuint32 FedVersion       = {0,0} 
 	untracked vuint32 DcuDetIdsVersion = {0,0}
 	untracked vuint32 DcuPsuMapVersion = {0,0}
 	
-	// Null value means use (analysis) versions below ("calibration")
+	// 1) A non-zero number means "retrieve a complete calibration set".
+	// 2) A null value means "use analysis versions below". {0,0} means "current state".
 	untracked uint32  GlobalAnalysisVersion = 0
 	
-	// Syntax is {major,minor}. {0,0} means "current state". ("history")
-	untracked vuint32 FastCablingVersion    = {0,0}
-	untracked vuint32 ApvTimingVersion      = {0,0}
-	untracked vuint32 OptoScanVersion       = {0,0}
-	untracked vuint32 VpspScanVersion       = {0,0}
-	untracked vuint32 ApvCalibVersion       = {0,0}
-	untracked vuint32 PedestalsVersion      = {0,0}
-	untracked vuint32 ApvLatencyVersion     = {0,0}
-	untracked vuint32 FineDelayVersion      = {0,0}
+	// Syntax is {major,minor}. 
+	untracked vuint32 FastCablingVersion = {0,0}
+	untracked vuint32 ApvTimingVersion   = {0,0}
+	untracked vuint32 OptoScanVersion    = {0,0}
+	untracked vuint32 VpspScanVersion    = {0,0}
+	untracked vuint32 ApvCalibVersion    = {0,0}
+	untracked vuint32 PedestalsVersion   = {0,0}
+	untracked vuint32 ApvLatencyVersion  = {0,0}
+	untracked vuint32 FineDelayVersion   = {0,0}
 	
 	// XML input files
 	untracked string  InputModuleXml  = "/afs/cern.ch/cms/cmt/onlinedev/data/examples/module.xml"
@@ -44,4 +48,3 @@ block SiStripPartitions = {
     // Additional partitions here...
 
 }
-
