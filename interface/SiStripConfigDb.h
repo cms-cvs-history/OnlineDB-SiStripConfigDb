@@ -1,4 +1,4 @@
-// Last commit: $Id: SiStripConfigDb.h,v 1.73 2008/10/31 09:22:50 bainbrid Exp $
+// Last commit: $Id: SiStripConfigDb.h,v 1.74 2008/10/31 09:35:35 bainbrid Exp $
 
 #ifndef OnlineDB_SiStripConfigDb_SiStripConfigDb_h
 #define OnlineDB_SiStripConfigDb_SiStripConfigDb_h
@@ -192,10 +192,10 @@ class SiStripConfigDb {
   void closeDbConnection();
 
   /** Returns database connection parameters. */
-  inline const SiStripDbParams& dbParams() const;
+  const SiStripDbParams& dbParams() const;
   
   /** Returns whether using database or xml files. */
-  inline bool usingDb() const;
+  bool usingDb() const;
   
   /** Returns pointer to DeviceFactory API, with check if NULL. */
   DeviceFactory* const deviceFactory( std::string method_name = "" ) const;
@@ -211,7 +211,7 @@ class SiStripConfigDb {
   public:
     sistrip::RunType type_;
     std::string      partition_;
-    uint16_t         number_;
+    uint32_t         number_;
     Run() : type_(sistrip::UNDEFINED_RUN_TYPE), partition_(""), number_(0) {;}
   };
   
@@ -236,6 +236,15 @@ class SiStripConfigDb {
 
   /** Retrieves all partitions names from database. */
   void partitions( std::list<std::string>& ) const;
+
+  /** Returns details of next physics run (>= run_number). */	 
+  Run nextPhysicsRun( const std::string& partition_name, uint32_t run_number ) const;	 
+  
+  /** Returns details of next commissioning run (>= run_number). */	 
+  Run nextCommissioningRun( const std::string& partition_name, uint32_t run_number ) const;	 
+  
+  /** Print method for class. */	 
+  void print( std::stringstream& ss ) const;
   
   //@@ SiStripPartition::Versions ???
 
@@ -307,10 +316,10 @@ class SiStripConfigDb {
   FedIdsRange getFedIds( std::string partition = "" );
   
   /** Strip-level info enabled/disabled within FED descriptions. */
-  inline bool usingStrips() const;
+  bool usingStrips() const;
   
   /** Enables/disables strip-level info within FED descriptions. */
-  inline void usingStrips( bool );
+  void usingStrips( bool );
   
 
   // ---------- DCU-DetId info ----------
@@ -488,16 +497,16 @@ class SiStripConfigDb {
 
 
 /** Returns database connection parameters. */
-const SiStripDbParams& SiStripConfigDb::dbParams() const { return dbParams_; }
+inline const SiStripDbParams& SiStripConfigDb::dbParams() const { return dbParams_; }
 
 /** Indicates whether DB (true) or XML files (false) are used. */
-bool SiStripConfigDb::usingDb() const { return dbParams_.usingDb(); }
+inline bool SiStripConfigDb::usingDb() const { return dbParams_.usingDb(); }
 
 /** Indicates whether FED strip info is uploaded/downloaded. */
-bool SiStripConfigDb::usingStrips() const { return usingStrips_; }
+inline bool SiStripConfigDb::usingStrips() const { return usingStrips_; }
 
 /** Switches on/off of upload/download for FED strip info. */
-void SiStripConfigDb::usingStrips( bool using_strips ) { usingStrips_ = using_strips; }
+inline void SiStripConfigDb::usingStrips( bool using_strips ) { usingStrips_ = using_strips; }
 
 
 #endif // OnlineDB_SiStripConfigDb_SiStripConfigDb_h
